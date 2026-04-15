@@ -3,7 +3,8 @@ import { domains, type Domain, type Club } from "@/lib/clubData";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { GraduationCap, BookOpen, CheckCircle2, School } from "lucide-react";
+import { BookOpen, CheckCircle2, School } from "lucide-react";
+import schoolLogo from "@/assets/school-logo.jpeg";
 
 export function ClubSelectionForm() {
   const [selectedDomain, setSelectedDomain] = useState<Domain | null>(null);
