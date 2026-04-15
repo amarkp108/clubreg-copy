@@ -162,8 +162,8 @@ function Header() {
       <div className="mx-auto max-w-4xl flex flex-col items-center text-center gap-3">
         <img src={schoolLogo} alt="Wisdom World School Logo" className="h-16 w-16 rounded-full object-cover" />
         <div>
-          <h1 className="text-xl font-bold text-white">Club Registration</h1>
-          <p className="text-sm text-white">Wisdom World School - Kurukshetra</p>
+          <h1 className="text-3xl font-bold text-white">Club Registration</h1>
+          <p className="text-lg text-white">Wisdom World School - Kurukshetra</p>
         </div>
         <p className="text-xs text-white opacity-70">Developed by Okie Dokie</p>
       </div>
