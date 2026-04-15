@@ -3,7 +3,8 @@ import { domains, type Domain, type Club } from "@/lib/clubData";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { GraduationCap, BookOpen, CheckCircle2, School } from "lucide-react";
+import { BookOpen, CheckCircle2, School } from "lucide-react";
+import schoolLogo from "@/assets/school-logo.jpeg";
 
 export function ClubSelectionForm() {
   const [selectedDomain, setSelectedDomain] = useState<Domain | null>(null);
@@ -157,20 +158,18 @@ export function ClubSelectionForm() {
 
 function Header() {
   return (
-    <div className="bg-[#1b3a2d] pb-14 pt-6 px-4">
+    <div className="pb-14 pt-6 px-4" style={{ backgroundColor: '#1A5C2A' }}>
       <div className="mx-auto max-w-4xl flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/10 border border-white/20">
-            <GraduationCap className="h-7 w-7 text-[#c8a951]" />
-          </div>
+          <img src={schoolLogo} alt="Wisdom World School Logo" className="h-14 w-14 rounded-full object-cover" />
           <div>
             <h1 className="text-xl font-bold text-white">
-              Club Registration <span className="font-normal text-white/60">/ Preferences</span>
+              Club Registration
             </h1>
-            <p className="text-sm text-[#c8a951]">Wisdom World School - Kurukshetra</p>
-            <p className="text-xs text-white/40">Session 2026-27</p>
+            <p className="text-sm text-white">Wisdom World School - Kurukshetra</p>
           </div>
         </div>
+        <p className="text-xs text-white opacity-70">Developed by Okie Dokie</p>
       </div>
     </div>
   );
