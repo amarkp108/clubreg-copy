@@ -159,15 +159,11 @@ export function ClubSelectionForm() {
 function Header() {
   return (
     <div className="pb-14 pt-6 px-4" style={{ backgroundColor: '#1A5C2A' }}>
-      <div className="mx-auto max-w-4xl flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <img src={schoolLogo} alt="Wisdom World School Logo" className="h-14 w-14 rounded-full object-cover" />
-          <div>
-            <h1 className="text-xl font-bold text-white">
-              Club Registration
-            </h1>
-            <p className="text-sm text-white">Wisdom World School - Kurukshetra</p>
-          </div>
+      <div className="mx-auto max-w-4xl flex flex-col items-center text-center gap-3">
+        <img src={schoolLogo} alt="Wisdom World School Logo" className="h-16 w-16 rounded-full object-cover" />
+        <div>
+          <h1 className="text-xl font-bold text-white">Club Registration</h1>
+          <p className="text-sm text-white">Wisdom World School - Kurukshetra</p>
         </div>
         <p className="text-xs text-white opacity-70">Developed by Okie Dokie</p>
       </div>
