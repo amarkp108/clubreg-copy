@@ -43,9 +43,7 @@ export const domains: Domain[] = [
   {
     id: 4,
     name: "Dramatics",
-    clubs: [
-      { name: "Stage to Sensor", incharge: "Mr Anil" },
-    ],
+    clubs: [{ name: "Stage to Sensor", incharge: "Mr Anil" }],
   },
   {
     id: 5,
@@ -72,9 +70,6 @@ export const domains: Domain[] = [
     clubs: [
       { name: "Literary Club", incharge: "Mr Dharmender / Ms Snehlata" },
       { name: "Comic Strip", incharge: "Ms Himanshi / Ms Anubhuti" },
-      { name: "Namaste Germany!", incharge: "Ms Vanshika / Mr Prashant" },
-      { name: "Namaste Japan!", incharge: "Mr Akhil / Mr Subhash" },
-      { name: "Namaste France!", incharge: "Mr Manu" },
     ],
   },
   {
