@@ -53,9 +53,6 @@ export function ClubSelectionForm() {
     setSubmitted(false);
   };
 
-  const selectedClubNames = selectedClubs.map((club) => club.name).join(", ");
-  const selectedIncharge = selectedClubs.map((club) => club.incharge).join(", ");
-
   const selectedCountForDomain = (domain: Domain) =>
     selectedClubs.filter((club) => domain.clubs.some((domainClub) => domainClub.name === club.name))
       .length;
@@ -69,6 +66,13 @@ export function ClubSelectionForm() {
     }))
     .filter((item) => item.clubs.length > 0);
 
+  const selectedClubsByDomainWithOffset = selectedClubsByDomain.map((item, domainIndex) => ({
+    ...item,
+    startNumber: selectedClubsByDomain
+      .slice(0, domainIndex)
+      .reduce((sum, current) => sum + current.clubs.length, 0),
+  }));
+
   if (submitted) {
     return (
       <div className="min-h-screen bg-[#f0f2f5]">
@@ -80,10 +84,48 @@ export function ClubSelectionForm() {
             </div>
             <h2 className="text-2xl font-bold text-[#1b3a2d]">Registration Successful!</h2>
             <p className="mt-2 text-[#6b7280]">Your club preference has been recorded.</p>
-            <div className="mt-6 rounded-xl bg-[#f8faf9] p-6 text-left space-y-3 text-sm max-w-md mx-auto">
-              <InfoRow label="Total selected" value={`${totalSelected}/${maxSelections}`} />
-              <InfoRow label="Clubs" value={selectedClubNames} />
-              <InfoRow label="Incharge" value={selectedIncharge} />
+            <div className="mt-6 rounded-xl bg-[#f8faf9] p-6 text-left text-sm max-w-md mx-auto">
+              <div className="mb-4 flex items-center justify-between rounded-lg bg-[#eff1f3] px-4 py-3 text-sm font-semibold text-[#1b3a2d]">
+                <span>Selected clubs</span>
+                <span className="text-[#6b7280]">
+                  {totalSelected}/{maxSelections}
+                </span>
+              </div>
+              <div className="overflow-hidden rounded-xl border border-[#e5e7eb] text-sm">
+                <div className="grid grid-cols-2 gap-4 bg-[#f3f4f6] px-4 py-3 text-xs uppercase tracking-[0.12em] text-[#6b7280]">
+                  <span>Domain</span>
+                  <span>Club</span>
+                </div>
+                <div className="divide-y divide-[#e5e7eb] bg-white">
+                  {selectedClubsByDomainWithOffset.map((item) =>
+                    item.clubs.map((club, index) => {
+                      const position = item.startNumber + index + 1;
+
+                      return (
+                        <div
+                          key={`${item.domainName}-${club.name}`}
+                          className={cn(
+                            "grid grid-cols-2 gap-4 px-4 py-3 text-sm text-[#1b3a2d]",
+                            index === item.clubs.length - 1
+                              ? "border-b-2 border-slate-500"
+                              : "border-b border-slate-300",
+                          )}
+                        >
+                          <span className={index === 0 ? "font-semibold" : "text-[#6b7280]"}>
+                            {index === 0 ? item.domainName : ""}
+                          </span>
+                          <span className="flex items-center gap-3">
+                            <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#e2e8f0] text-xs font-semibold text-[#1b3a2d]">
+                              {position}
+                            </span>
+                            <span>{club.name}</span>
+                          </span>
+                        </div>
+                      );
+                    }),
+                  )}
+                </div>
+              </div>
             </div>
             <Button
               onClick={handleReset}
@@ -264,18 +306,43 @@ export function ClubSelectionForm() {
                 </Button>
               </div>
               {previewOpen && (
-                <div className="mt-5 rounded-2xl bg-[#f8faf9] p-4 text-sm">
+                <div className="mt-5 overflow-hidden rounded-2xl bg-[#f8faf9] p-4 text-sm">
                   {selectedClubsByDomain.length ? (
-                    selectedClubsByDomain.map((item) => (
-                      <div key={item.domainName} className="mb-4 last:mb-0">
-                        <p className="font-semibold text-[#1b3a2d]">{item.domainName}</p>
-                        <ul className="list-disc list-inside text-[#6b7280]">
-                          {item.clubs.map((club) => (
-                            <li key={club.name}>{club.name}</li>
-                          ))}
-                        </ul>
+                    <div className="overflow-hidden rounded-xl border border-[#e5e7eb] bg-white text-sm">
+                      <div className="grid grid-cols-2 gap-4 bg-[#f3f4f6] px-4 py-3 text-xs uppercase tracking-[0.12em] text-[#6b7280]">
+                        <span>Domain</span>
+                        <span>Club</span>
                       </div>
-                    ))
+                      <div className="divide-y divide-[#e5e7eb] bg-white">
+                        {selectedClubsByDomainWithOffset.map((item) =>
+                          item.clubs.map((club, index) => {
+                            const position = item.startNumber + index + 1;
+
+                            return (
+                              <div
+                                key={`${item.domainName}-${club.name}`}
+                                className={cn(
+                                  "grid grid-cols-2 gap-4 px-4 py-3 text-sm text-[#1b3a2d]",
+                                  index === item.clubs.length - 1
+                                    ? "border-b-2 border-slate-500"
+                                    : "border-b border-slate-300",
+                                )}
+                              >
+                                <span className={index === 0 ? "font-semibold" : "text-[#6b7280]"}>
+                                  {index === 0 ? item.domainName : ""}
+                                </span>
+                                <span className="flex items-center gap-3">
+                                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#e2e8f0] text-xs font-semibold text-[#1b3a2d]">
+                                    {position}
+                                  </span>
+                                  <span>{club.name}</span>
+                                </span>
+                              </div>
+                            );
+                          }),
+                        )}
+                      </div>
+                    </div>
                   ) : (
                     <p className="text-[#6b7280]">No clubs selected yet.</p>
                   )}
